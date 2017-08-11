@@ -24,6 +24,26 @@ Overall the structure of this backend follows a lot of the implementation decisi
 
 ## Setup
 
+### Automatic Setup
+
+If using PE, there is a class that will handle the installation of the appropriate dependencies and gems for you automatically. This currently has only been developed for CentOS/RedHat 7 though other platforms will be added in the future.
+
+```puppet
+include hiera_sqlserver
+```
+
+### Manual Setup
+
+If you would like to set this up manually there are a few steps. The first will be getting puppetserver enabled for using this backend and that step requires installing jdbc-sqlserver into the puppetserver ruby context.
+
+```bash
+/opt/puppetlabs/bin/puppetserver gem install jdbc-sqlserver
+```
+Make sure to restart Puppetserver after this.
+
+```bash
+service pe-puppetserver restart
+```
 
 ### What hiera_sqlserver affects **OPTIONAL**
 
