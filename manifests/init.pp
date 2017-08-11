@@ -7,5 +7,4 @@
 # @example
 #   include hiera_mssql
 class hiera_mssql {
-  
 }
