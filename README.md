@@ -5,9 +5,8 @@
 
 1. [Description](#description)
 2. [Setup - The basics of getting started with hiera_sqlserver](#setup)
-    * [What hiera_sqlserver affects](#what-hiera_sqlserver-affects)
-    * [Setup requirements](#setup-requirements)
-    * [Beginning with hiera_sqlserver](#beginning-with-hiera_sqlserver)
+    * [Automatic Setup](#automatic-setup)
+    * [Manual Setup](#manual-setup)
 3. [Usage - Configuration options and additional functionality](#usage)
 4. [Reference - An under-the-hood peek at what the module is doing and how](#reference)
 5. [Limitations - OS compatibility, etc.](#limitations)
@@ -59,19 +58,37 @@ Afterwards, you will need to install tiny_tds. I have tested against an older ve
 /opt/puppetlabs/puppet/bin/gem install tiny_tds -v '0.7.0' -- --enable-system-freetds
 ```
 
-### Setup Requirements **OPTIONAL**
-
-If your module requires anything extra before setting up (pluginsync enabled, another module, etc.), mention it here. 
-  
-If your most recent release breaks compatibility or requires particular steps for upgrading, you might want to include an additional "Upgrading" section here.
-
-### Beginning with hiera_sqlserver  
-
-The very basic steps needed for a user to get the module up and running. This can include setup steps, if necessary, or it can be an example of the most basic use of the module.
-
 ## Usage
 
-This section is where you describe how to customize, configure, and do the fancy stuff with your module here. It's especially helpful if you include usage examples and code samples for doing things with your module.
+This is an example hiera.yaml (version 3) configuration
+
+```
+---
+:backends:
+- yaml
+- sqlserver
+
+:hierarchy:
+  - secure
+  - "nodes/%{hostname}"
+  - "location/%{location}"
+  - common
+
+
+:yaml:
+  :datadir: "/etc/puppetlabs/code/environments/%{environment}/hieradata"
+
+:sqlserver:
+  :host: 192.168.2.219
+  :user: sa
+  :pass: Ub3rS3cr3+
+  :database: configdata
+  :instance: MYINSTANCE
+
+  :query: SELECT val FROM configdata1 WHERE var='%{key}' AND environment='%{environment}'
+
+:logger: console
+```
 
 ## Reference
 
