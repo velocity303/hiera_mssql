@@ -28,6 +28,8 @@ Overall the structure of this backend follows a lot of the implementation decisi
 
 If using PE, there is a class that will handle the installation of the appropriate dependencies and gems for you automatically. This currently has only been developed for CentOS/RedHat 7 though other platforms will be added in the future.
 
+Make sure to classify the Puppet Master with this configuration.
+
 ```puppet
 include hiera_sqlserver
 ```
@@ -44,16 +46,18 @@ Make sure to restart Puppetserver after this.
 ```bash
 service pe-puppetserver restart
 ```
+**NOTE:** This will ensure that the required gems are installed in puppetserver's jruby environment, but for cli based troubleshooting or hiera useage we need to do a few more installation steps.
 
-### What hiera_sqlserver affects **OPTIONAL**
+This module currently assumes that you will be using the freetds provided by the system. As such, you should make sure you have freetds installed on your system with something like the following.
 
-If it's obvious what your module touches, you can skip this section. For example, folks can probably figure out that your mysql_instance module affects their MySQL instances.
+```bash
+yum install freetds freetds-devel
+```
+Afterwards, you will need to install tiny_tds. I have tested against an older version, 0.7.0, but more modern versions may be able to be used. For example on Puppet Platform 5 which uses more modern ruby versions the latest may be able to be used easily.
 
-If there's more that they should know about, though, this is the place to mention:
-
-* Files, packages, services, or operations that the module will alter, impact, or execute.
-* Dependencies that your module automatically installs.
-* Warnings or other important notices.
+```bash
+/opt/puppetlabs/puppet/bin/gem install tiny_tds -v '0.7.0' -- --enable-system-freetds
+```
 
 ### Setup Requirements **OPTIONAL**
 
