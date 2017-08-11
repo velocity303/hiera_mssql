@@ -1,13 +1,13 @@
 
-# hiera_mssql
+# hiera_sqlserver
 
 #### Table of Contents
 
 1. [Description](#description)
-2. [Setup - The basics of getting started with [modulename]](#setup)
-    * [What [modulename] affects](#what-[modulename]-affects)
+2. [Setup - The basics of getting started with hiera_sqlserver](#setup)
+    * [What hiera_sqlserver affects](#what-hiera_sqlserver-affects)
     * [Setup requirements](#setup-requirements)
-    * [Beginning with [modulename]](#beginning-with-[modulename])
+    * [Beginning with hiera_sqlserver](#beginning-with-hiera_sqlserver)
 3. [Usage - Configuration options and additional functionality](#usage)
 4. [Reference - An under-the-hood peek at what the module is doing and how](#reference)
 5. [Limitations - OS compatibility, etc.](#limitations)
@@ -25,7 +25,7 @@ Overall the structure of this backend follows a lot of the implementation decisi
 ## Setup
 
 
-### What [modulename] affects **OPTIONAL**
+### What hiera_sqlserver affects **OPTIONAL**
 
 If it's obvious what your module touches, you can skip this section. For example, folks can probably figure out that your mysql_instance module affects their MySQL instances.
 
@@ -41,7 +41,7 @@ If your module requires anything extra before setting up (pluginsync enabled, an
   
 If your most recent release breaks compatibility or requires particular steps for upgrading, you might want to include an additional "Upgrading" section here.
 
-### Beginning with [modulename]  
+### Beginning with hiera_sqlserver  
 
 The very basic steps needed for a user to get the module up and running. This can include setup steps, if necessary, or it can be an example of the most basic use of the module.
 
