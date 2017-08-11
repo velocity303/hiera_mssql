@@ -1,12 +1,12 @@
 {
-  "name": "velocity303-hiera_mssql",
+  "name": "velocity303-hiera_sqlserver",
   "version": "0.1.0",
   "author": "James E. Jones",
   "summary": "A hiera backend for connecting to MS SQL Server databases",
   "license": "Apache-2.0",
-  "source": "https://github.com/velocity303/hiera_mssql",
-  "project_page": "https://github.com/velocity303/hiera_mssql",
-  "issues_url": "https://github.com/velocity303/hiera_mssql",
+  "source": "https://github.com/velocity303/hiera_sqlserver",
+  "project_page": "https://github.com/velocity303/hiera_sqlserver",
+  "issues_url": "https://github.com/velocity303/hiera_sqlserver",
   "dependencies": [
     {
       "name": "puppetlabs-stdlib",

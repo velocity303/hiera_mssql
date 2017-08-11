@@ -1,8 +1,8 @@
-# Class Mssql_backend
+# Class sqlserver_backend
 # Description: MS SQL back end to Hiera.
 class Hiera
   module Backend
-    class Mssql_backend
+    class Sqlserver_backend
       def initialize
         @use_jdbc = defined?(JRUBY_VERSION) ? true : false 
         if @use_jdbc
@@ -12,18 +12,17 @@ class Hiera
           require 'sqljdbc4.jar'
         else
           require 'rubygems'
-	        require 'sequel'
           require 'tiny_tds'
         end
 
-        Hiera.debug("mssql_backend initialized")
+        Hiera.debug("sqlserver_backend initialized")
         Hiera.debug("JDBC mode #{@use_jdbc}")
       end
 
 
       def lookup(key, scope, order_override, resolution_type)
 
-        Hiera.debug("mssql_backend invoked lookup")
+        Hiera.debug("sqlserver_backend invoked lookup")
         Hiera.debug("resolution type is #{resolution_type}")
 
         answer = nil
@@ -32,12 +31,12 @@ class Hiera
         # to extra_data so this can be interpreted into the query 
         # string
         #
-        queries = [ Config[:mssql][:query] ].flatten
+        queries = [ Config[:sqlserver][:query] ].flatten
         queries.map! { |q| Backend.parse_string(q, scope, {"key" => key}) }
 
-        queries.each do |mssql_query|
+        queries.each do |sqlserver_query|
 
-          results = query(mssql_query)
+          results = query(sqlserver_query)
 
           unless results.empty?
             case resolution_type
@@ -60,11 +59,11 @@ class Hiera
         Hiera.debug("Executing SQL Query: #{sql}")
 
         data=[]
-        mssql_host=Config[:mssql][:host]
-        mssql_user=Config[:mssql][:user]
-        mssql_pass=Config[:mssql][:pass]
-        mssql_database=Config[:mssql][:database]
-        mssql_instance=Config[:mssql][:instance]
+        sqlserver_host=Config[:sqlserver][:host]
+        sqlserver_user=Config[:sqlserver][:user]
+        sqlserver_pass=Config[:sqlserver][:pass]
+        sqlserver_database=Config[:sqlserver][:database]
+        sqlserver_instance=Config[:sqlserver][:instance]
 
 
         if @use_jdbc
@@ -73,10 +72,10 @@ class Hiera
           #
           Jdbc::Sqlserver.load_driver
           #Java::com.microsoft.sqlserver.jdbc.SQLServerDriver
-          url = "jdbc:sqlserver://#{mssql_host}:1433;instanceName=#{mssql_instance};databaseName=#{mssql_database}"
+          url = "jdbc:sqlserver://#{sqlserver_host}:1433;instanceName=#{sqlserver_instance};databaseName=#{sqlserver_database}"
           props = java.util.Properties.new
-          props.set_property :user, mssql_user
-          props.set_property :password, mssql_pass
+          props.set_property :user, sqlserver_user
+          props.set_property :password, sqlserver_pass
           driver = Java::com.microsoft.sqlserver.jdbc.SQLServerDriver.new
           conn = driver.connect(url,props)
           statement = conn.create_statement
@@ -98,7 +97,7 @@ class Hiera
             end
           end
         else
-          client = TinyTds::Client.new username: "#{mssql_user}", password: "#{mssql_pass}", host: "#{mssql_host}", database: "#{mssql_database}"
+          client = TinyTds::Client.new username: "#{sqlserver_user}", password: "#{sqlserver_pass}", host: "#{sqlserver_host}", database: "#{sqlserver_database}"
           res = client.execute(sql)
 
           res.each do |row|
