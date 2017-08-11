@@ -27,7 +27,7 @@ class Hiera
 
         answer = nil
 
-        # Parse the mssql query from the config, we also pass in key
+        # Parse the sqlserver query from the config, we also pass in key
         # to extra_data so this can be interpreted into the query 
         # string
         #
