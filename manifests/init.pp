@@ -7,4 +7,5 @@
 # @example
 #   include hiera_mssql
 class hiera_mssql {
+  include hiera_mssql::install
 }
