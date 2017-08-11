@@ -18,7 +18,7 @@ class hiera_mssql::install {
   package { 'tiny_tds':
     ensure          => '0.7.0',
     provider        => puppet_gem,
-    install_options => '--enable-system-freetds',
+    install_options => '-- --enable-system-freetds',
     require         => Package[$freetds_packages],
   }
 
